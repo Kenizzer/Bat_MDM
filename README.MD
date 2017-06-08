@@ -5,18 +5,23 @@ results!
 
 ##Useful commands to know when working in UNIX
 man will show the manual for a command in UNIX, these are very detailed and are invaluble.
+
 	$ man some_command
 
 Checks permissions & size
 [PHOTO](http://linuxcommand.org/images/file_permissions.png)
+
 	$ ls -lsha    
 
    
 Give a file execute permission
-    $ chmod u+x filename.sh
+
+	$ chmod u+x filename.sh
 
 Nano is a text editor, useable from the command line. It is simple and can get the job done quick.
+
 	$ nano 
+	
 If you scripts in more than a simple loop or series of commands go to a real text editor
 examples Sublime text, Notepad++, Emacs etc
 
