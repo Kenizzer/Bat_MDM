@@ -1,0 +1,2 @@
+#exp	sample	tags	forward_primer	reverse_primer
+bat3	P1	-:-		TRRGACGAGAAGACCCTATA	TCTTAATCCAACATCGAGGTC
