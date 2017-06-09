@@ -6,7 +6,7 @@
 
 ### MAKE SURE TO CALL OBITOOLS FIRST TO ENTER THE CORRECT ENVIORNMENT
 
-###The find command is used to geneerate a list of all the fastq files in the current directory.
+###The find command is used to generate a list of all the fastq files in the current directory.
 ###The list is then reversed the name cuts all characters up to the _R(1/2)_001.fastq, leaving only the begining of the file.
 ###then the line reverses again and uniques all the names leaving one per every two files (R1 and R2)
 ###thus creating a list of names to call for varible {}, which is the sub in place {}R2_001.fastq {}R1_001.fastq.
@@ -16,15 +16,17 @@
 
 find . -type f -name "*.fastq" | rev | cut -c 13- | rev | sort | uniq | parallel "illuminapairedend --score-min=40 -r {}R2_001.fastq {}R1_001.fastq > {}paired.fq"
 
-##Making directorys to store files 
+##Making directorys to store files##
 
 mkdir -p raw_unpaired_seqs
 mv *R?_*.fastq raw_unpaired_seqs/
 mkdir -p P{1,2,3,4,5,6,7,8,9,10}
 
-###NGSFIltering by primer
-###Was able to make this section parallel by creating a function "NGSfilterJS" to call for the
-###one liner below.
+##NGSFIltering by primer##
+
+#This section will need to be modified to fit the number of primers you have used.
+#Right now it is setup to use 10 filter files (i.e. we used 10 primers).
+#To Modify just add or delete 
 
 NGSfilterJS() {
 	
@@ -86,12 +88,12 @@ export -f NGSfilterJS
 
 find . -type f -name "*paired.fq" | parallel NGSfilterJS
 
-##Removing temp files created during the ngsfiltering process
+##Removing temp files created during the ngsfiltering process##
 
 rm *temp*.fastq
 rm *placeholder.fq
 
-##Moving sorted files to the correct folders
+##Moving sorted files to the correct folders##
 
 mv *_PRIMER1.fq P1/
 mv *_PRIMER2.fq P2/
@@ -104,38 +106,38 @@ mv *_PRIMER8.fq P8/
 mv *_PRIMER9.fq P9/
 mv *_PRIMER10.fq P10/
 
-###moving paired sequences to their own folder
+##moving paired sequences to their own folder##
 
 mkdir -p paired_seqs
 mv *paired.fq paired_seqs/
 
-###Uniqing samples reads
+##Uniqing samples reads##
 
 for i in P*/*.fq; do
 	 obiuniq $i > $$
 	 mv $$ $i
 done
 
-###Removing annotations and leaving only count
+##Removing annotations and leaving only count##
 
 for i in P*/*uniqed.fq; do
 	obiannotate -k count $i > $$
 	mv $$ $i 
 done
 
-###Removing sequence which have less than 5 reads and are smaller than 120bp
+##Removing sequence which have less than 5 reads and are smaller than 120bp##
 
 for i in P*/*uniqed.fq; do
 	obigrep -l 50 -p 'count>=5' $i > $$
 	mv $$ $i
 done
 
-###This part of the will clean the sequences for PCRerrors
+##This part of the will clean the sequences for PCRerrors##
 
 for i in P*/*uniqed.fq; do
 	obiclean -r 0.05 -H $i > ${i%_uniqed.fq}_clean_filtered.fasta
 done
 
-###Blasting the samples
+##Blasting the samples##
 
 find P? -iname "*.fasta" | parallel blastn -db /media/kenizzer/EXT2/ntDB/nt -query {} -out {.}.out
