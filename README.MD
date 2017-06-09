@@ -3,7 +3,7 @@
 As always everything in this pipeline is as is. There will be mistakes so take care to double check your
 results!
 
-##Useful commands to know when working in UNIX
+## Useful commands to know when working in UNIX
 man will show the manual for a command in UNIX, these are very detailed and are invaluble.
 
 	$ man some_command
@@ -21,27 +21,27 @@ Give a file execute permission
 Nano is a text editor, useable from the command line. It is simple and can get the job done quick.
 
 	$ nano 
-	
+
 If you scripts in more than a simple loop or series of commands go to a real text editor
 examples Sublime text, Notepad++, Emacs etc
 
 Be mindful of line endings as these can cause scripts to fail, Notepad ++ on windows the default EOL (End of 
 line) is windows format and you must change it to UNIX for the script to run(Don't forget the execution permissions).
 
-##OBITOOLS
+## OBITOOLS
 
 It is very wise to consult all the documentaion on the OBITOOLS website before beginning as it will save 
 some headaches later. *You were warned!*
 
 [OBITOOLS Website](http://metabarcoding.org/obitools/doc/)
 
-##Parallel pipeline
+## Parallel pipeline
 
 It is very important to call OBITOOLS, in order to set the right environment before starting the pipeline.
 
-The parallel pipeline script takes a few basic files to run 
+The parallel pipeline script takes a few basic items to run 
 
-	1. Fastq (From an illumina platform)
+	1. Fastq files from an illumina platform (R1 & R2 files)
 	2. Filter files for demultiplexing your reads into seperate primers (See example in the repo)
 
 
