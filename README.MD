@@ -41,12 +41,15 @@ It is very important to call OBITOOLS, in order to set the right environment bef
 ###Required Programs 
 
 [OBITOOLS](https://git.metabarcoding.org/obitools/obitools/wikis/home)
+
 [GNUparallel](https://www.gnu.org/software/parallel/)
+
 [BLAST+ suite](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
 
 Optional Programs (can make your life easier)
 
 [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+
 [MultiQC](https://github.com/ewels/MultiQC)
 
 The parallel pipeline script takes a few basic items to run 
