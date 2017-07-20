@@ -52,6 +52,9 @@ Optional Programs (can make your life easier)
 
 [MultiQC](https://github.com/ewels/MultiQC)
 
+[MicNeSs](http://wwwabi.snv.jussieu.fr/public/MicNeSs/)
+ Only needed if you would like to score microsatellites from NGS reads. See documentation on Marie Suez et al. for more details about how this is conducted
+
 The parallel pipeline script takes a few basic items to run 
 
 	1. Fastq files from an illumina platform (R1 & R2 files)
