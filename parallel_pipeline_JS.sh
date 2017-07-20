@@ -126,6 +126,11 @@ for i in P*/*uniqed.fq; do
 done
 
 ##Removing sequence which have less than 5 reads and are smaller than 120bp##
+#Of particular imporatnce in this step is the filter by count it is important to tune this
+#to your dataset. In our case we wanted to observe the sources of contamination (even in low amounts) 
+#within our negative controls, so we set the read count filter lower than we normally would.
+#A sensible place to start is filtering by read counts around 20, as our negative controls had 
+#mostly sequences with 'count>=20'.
 
 for i in P*/*uniqed.fq; do
 	obigrep -l 50 -p 'count>=5' $i > $$

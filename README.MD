@@ -1,6 +1,6 @@
 # Bat Multifaceted DNA Metabarcoding (MDM) Pipeline
 
-As always everything in this pipeline is as is. There will be mistakes so take care to double check your
+As always, everything in this pipeline is as is. There will be mistakes so take care to double check your
 results!
 
 ## Useful commands to know when working in UNIX
@@ -13,7 +13,6 @@ Checks permissions & size
 
 	$ ls -lsha    
 
-   
 Give a file execute permission
 
 	$ chmod u+x filename.sh
@@ -39,11 +38,22 @@ some headaches later. *You were warned!*
 
 It is very important to call OBITOOLS, in order to set the right environment before starting the pipeline.
 
+###Required Programs 
+
+[OBITOOLS](https://git.metabarcoding.org/obitools/obitools/wikis/home)
+[GNUparallel](https://www.gnu.org/software/parallel/)
+[BLAST+ suite](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
+
+Optional Programs (can make your life easier)
+
+[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+[MultiQC](https://github.com/ewels/MultiQC)
+
 The parallel pipeline script takes a few basic items to run 
 
 	1. Fastq files from an illumina platform (R1 & R2 files)
 	2. Filter files for demultiplexing your reads into seperate primers (See example in the repo)
-
+	3. A database to search against for Taxa annotation (Most public databases can be downloaded through an FTP server)
 
 The pipeline consists of seven main parts
 
