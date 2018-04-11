@@ -7,16 +7,16 @@
 ### MAKE SURE TO CALL OBITOOLS FIRST TO ENTER THE CORRECT ENVIORNMENT
 
 ###The find command is used to generate a list of all the fastq files in the current directory.
-###The list is then reversed the name cuts all characters up to the _R(1/2)_001.fastq, leaving only the begining of the file.
+###The list is then reversed the name cuts all characters up to the _R(1/2)_001.fastq, leaving only the beginning of the file.
 ###then the line reverses again and uniques all the names leaving one per every two files (R1 and R2)
-###thus creating a list of names to call for varible {}, which is the sub in place {}R2_001.fastq {}R1_001.fastq.
+###thus creating a list of names to call for variable {}, which is the sub in place {}R2_001.fastq {}R1_001.fastq.
 ###The resulting output is redirected to a file, with the ending paired.fq
 
 ##Paired end merging##
 
 find . -type f -name "*.fastq" | rev | cut -c 13- | rev | sort | uniq | parallel "illuminapairedend --score-min=40 -r {}R2_001.fastq {}R1_001.fastq > {}paired.fq"
 
-##Making directorys to store files##
+##Making directories to store files##
 
 mkdir -p raw_unpaired_seqs
 mv *R?_*.fastq raw_unpaired_seqs/
@@ -26,7 +26,7 @@ mkdir -p P{1,2,3,4,5,6,7,8,9,10}
 
 #This section will need to be modified to fit the number of primers you have used.
 #Right now it is setup to use 10 filter files (i.e. we used 10 primers).
-#To Modify just add or delete 
+#To Modify just add or delete code blocks
 
 NGSfilterJS() {
 	
@@ -106,12 +106,12 @@ mv *_PRIMER8.fq P8/
 mv *_PRIMER9.fq P9/
 mv *_PRIMER10.fq P10/
 
-##moving paired sequences to their own folder##
+##Moving paired sequences to their own folder##
 
 mkdir -p paired_seqs
 mv *paired.fq paired_seqs/
 
-##Uniqing samples reads##
+##Unique-ing samples reads##
 
 for i in P*/*.fq; do
 	 obiuniq $i > $$
@@ -125,23 +125,18 @@ for i in P*/*uniqed.fq; do
 	mv $$ $i 
 done
 
-##Removing sequence which have less than 5 reads and are smaller than 120bp##
-#Of particular imporatnce in this step is the filter by count it is important to tune this
+##Removing sequences which have less than 5 reads and are smaller than 50bp##
+#Of particular importance in this step is the filter by count it is important to tune this
 #to your dataset. In our case we wanted to observe the sources of contamination (even in low amounts) 
 #within our negative controls, so we set the read count filter lower than we normally would.
 #A sensible place to start is filtering by read counts around 20, as our negative controls had 
-#mostly sequences with 'count>=20'.
+#mostly sequences with 'count<=20'.
 
 for i in P*/*uniqed.fq; do
 	obigrep -l 50 -p 'count>=5' $i > $$
 	mv $$ $i
 done
 
-##This part of the will clean the sequences for PCRerrors##
-
-for i in P*/*uniqed.fq; do
-	obiclean -r 0.05 -H $i > ${i%_uniqed.fq}_clean_filtered.fasta
-done
 
 ##Blasting the samples##
 
