@@ -1,6 +1,6 @@
 Our demultiplxing strategy differed from the standard operating procedure of 
 ***ngsfilter***. We used illumina indices without “tag” sequences in our experimental 
-design. We ran ***ngsfilter*** with __demultiplex files for each primer__, each containing
+design. We ran ***ngsfilter*** with ***demultiplex files for each primer***, each containing
  a single primer with tags as “-:-“ (e.g. see ngsfil_file1.txt).
 
 This results in a file with each sequence possessing a single addition to the 
