@@ -63,10 +63,10 @@ The parallel pipeline script takes a few basic items to run
 
 The pipeline consists of seven main parts
 
-	1. Paired read merging 
-	2. Demultiplexing by primer
-	3. Dereplicate reads into unique sequences
-	4. Removing all annotations in the header line except number of reads
-	5. Filtering based on length and number of reads
-	6. Cleaning the sequences of PCRerrors and chimeras
-	7. Blasting against a local NCBI nt database
+1. Paired read merging - _OBITOOLS_ **_illuminapairedend_**
+2. Demultiplexing by primer - _OBITOOLS_ **_ngsfilter_**
+3. Dereplicate reads into unique sequences - _OBITOOLS_ **_obiuniq_**
+4. Removing all annotations in the header line except number of reads - _OBITOOLS_ **_obiannotate_**
+5. Filtering based on length and number of reads  - _OBITOOLS_ **_obigrep_**
+6. Blasting against a local NCBI nt database - **Blastn**
+7. Lowest Common Ancestor assignment - **Megan**
